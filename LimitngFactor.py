@@ -2,13 +2,13 @@ import streamlit as st;
 
 st.title('Limiting Factors Example:');
 
-init_bread = st.number_input("Amount of bread: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-init_ham = int(input("Amount of ham: "));
-init_cheese = int(input("Amount of cheese: "));
+init_bread = st.number_input("Amount of bread: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
+init_ham = st.number_input("Amount of ham: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
+init_cheese = st.number_input("Amount of cheese: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
-bread_amount_needed = int(input("Amount of bread needed per sandwich: "));
-ham_amount_needed = int(input("Amount of ham needed per sandwich: "));
-cheese_amount_needed = int(input("Amount of cheese needed per sandwich: "));
+bread_amount_needed = st.number_input("Amount of bread needed per sandwich: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
+ham_amount_needed = st.number_input("Amount of ham needed per sandwich: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
+cheese_amount_needed = st.number_input("Amount of cheese needed per sandwich: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
 possible_sandwiches = 0;
 
@@ -33,9 +33,9 @@ if (init_cheese - (cheese_amount_needed * (possible_sandwiches + 1)) < 0):
     limiting_factors.insert(0, "cheese");
 
 if (possible_sandwiches == 1):
-    print("you can create " + str(possible_sandwiches) + " sandwich.");
+    st.text("you can create " + str(possible_sandwiches) + " sandwich.");
 else:
-    print("you can create " + str(possible_sandwiches) + " sandwiches.");
+    st.text("you can create " + str(possible_sandwiches) + " sandwiches.");
 
-print("limiting factors:");
-print(limiting_factors);
+st.subheader("limiting factors:");
+st.text(limiting_factors);
