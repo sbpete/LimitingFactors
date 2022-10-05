@@ -1,3 +1,7 @@
+import streamlit as st;
+
+st.title('Uber pickups in NYC');
+
 init_bread = int(input("Amount of bread: "));
 init_ham = int(input("Amount of ham: "));
 init_cheese = int(input("Amount of cheese: "));
