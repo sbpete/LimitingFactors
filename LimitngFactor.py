@@ -40,4 +40,4 @@ else:
     st.title("you can create " + str(possible_sandwiches) + " sandwiches.");
 
 st.header("limiting factors:");
-st.aubheader(limiting_factors);
+st.subheader(limiting_factors);
