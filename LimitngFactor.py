@@ -1,8 +1,8 @@
 import streamlit as st;
 
-st.title('Uber pickups in NYC');
+st.title('Limiting Factors Example:');
 
-init_bread = int(input("Amount of bread: "));
+init_bread = st.number_input("Amount of bread: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 init_ham = int(input("Amount of ham: "));
 init_cheese = int(input("Amount of cheese: "));
 
