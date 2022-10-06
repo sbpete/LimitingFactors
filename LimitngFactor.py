@@ -1,43 +1,75 @@
-import streamlit as st;
+import streamlit as st
+import pandas as pd
 
-st.title('Limiting Factors Example:');
+# input data from github
 
-init_bread = st.number_input("Amount of bread: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
-init_ham = st.number_input("Amount of ham: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
-init_cheese = st.number_input("Amount of cheese: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+inputPath = r'https://raw.githubusercontent.com/DataScienceTempleFirst/EDS/a08881aeae3c63e23232ea475ab74b2a5eb6240f/spring2022/week13_14/data/Periodic_Table_of_Elements.csv'
+df = pd.read_csv(inputPath, error_bad_lines=False)
+cols = [2]
+df = df[df.columns[cols]]
+print(df)
 
-st.header("Amount needed per sandwich");
+# title
 
-bread_amount_needed = st.number_input("bread: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
-ham_amount_needed = st.number_input("ham: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible");
-cheese_amount_needed = st.number_input("cheese: ", min_value=None, max_value=None, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+st.title('Limiting Factors Example:')
 
-possible_sandwiches = 0;
+# get name and amount of element
 
-bread = init_bread;
-ham = init_bread;
-cheese = init_cheese;
+element_num = st.number_input("How many elements are in your equation: ", value=0)
 
-while ((bread - bread_amount_needed) >= 0) and ((ham - ham_amount_needed) >= 0) and ((cheese - cheese_amount_needed) >= 0):
-    possible_sandwiches += 1;
-    bread -= bread_amount_needed;
-    ham -= ham_amount_needed;
-    cheese -= cheese_amount_needed;
+element_names = []
+init_elements = []
 
-limiting_factors = [];
-if (init_bread - (bread_amount_needed * (possible_sandwiches + 1)) < 0):
-    limiting_factors.insert(0, "bread");
+for i in range(element_num):
+    valid_element = False;
+    while not valid_element:
+        st.text("please input valid element.")
+        proposed_name = st.text_input("Element:")
 
-if (init_ham - (ham_amount_needed * (possible_sandwiches + 1)) < 0):
-    limiting_factors.insert(0, "ham");
+        if proposed_name in df:
+            element_names.append(proposed_name)
+            valid_element = True
+            st.text("valid.")
 
-if (init_cheese - (cheese_amount_needed * (possible_sandwiches + 1)) < 0):
-    limiting_factors.insert(0, "cheese");
+    init_elements.append(st.number_input("Amount of " + element_names[i] + ": ", value=0))
 
-if (possible_sandwiches == 1):
-    st.title("you can create " + str(possible_sandwiches) + " sandwich.");
-else:
-    st.title("you can create " + str(possible_sandwiches) + " sandwiches.");
+# get amount needed of each per reaction
 
-st.header("limiting factors:");
-st.subheader(limiting_factors);
+st.header("Amount of element needed per reaction")
+
+reaction_elements = []
+
+for i in range(element_num):
+   init_elements.append(st.number_input("Amount of " + element_names[i] + " needed per reaction: ", value=0))
+
+# assign starting values to elements
+
+reactions_possible = 0
+
+element_amount = []
+
+for i in range(element_num):
+    element_amount.append(init_elements[i])
+
+# perform loop
+repeating = True
+
+while repeating:
+    for i in range(element_num):
+        element_amount - reaction_elements
+        if element_amount <= 0:
+            repeating = False
+    reactions_possible += 1
+
+# check to see if factor is limiting factor
+limiting_factors = []
+
+for i in range(element_num):
+    if init_elements[i] - (reaction_elements[i] * (reactions_possible + 1)) < 0:
+        limiting_factors.append(element_names[i])
+    else:
+        if element_names[i] in limiting_factors:
+            limiting_factors.remove(element_names[i])
+
+st.header("limiting factors:")
+st.subheader(limiting_factors)
