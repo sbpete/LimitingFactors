@@ -20,8 +20,10 @@ element_num = st.number_input("How many elements are in your equation: ", value=
 element_names = []
 init_elements = []
 
+valid_element = False
+
 for i in range(element_num):
-    valid_element = False;
+    valid_element = False
     while not valid_element:
         st.text("please input valid element.")
         proposed_name = st.text_input("Element:")
