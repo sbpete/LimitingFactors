@@ -15,7 +15,7 @@ st.title('Limiting Factors Example:')
 
 # get name and amount of element
 
-element_num = st.number_input("How many elements are in your equation: ", value=0)
+element_num = 3 #st.number_input("How many elements are in your equation: ", value=0)
 
 element_names = []
 init_elements = []
